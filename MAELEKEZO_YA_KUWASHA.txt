@@ -1,0 +1,84 @@
+=====================================================================
+GLOW NET V4 - MWONGOZO WA MFUMO WENYE RIPOTI NA GRAFU ZA MAPATO
+=====================================================================
+
+Mfumo huu umeboreshwa kwa kiwango cha juu (Production-Grade V4) ukiwa na:
+1. Ripoti za Kina za Matawi & Grafu za Mapato (Chart.js):
+   - Ripoti kamili ya kila tawi inayoonyesha idadi ya miamala, mapato ya Simu (Mobile Money), 
+     mapato ya Vocha za Cash, na ada za matawi pamoja na Jumla Kuu.
+   - Kitufe cha moja kwa moja cha kuchapisha ripoti rasmi au ku-export kama PDF (`Chapisha Ripoti (PDF)`).
+   - Grafu ya kisasa ya mwenendo wa mauzo ya siku 7 zilizopita.
+2. Malipo ya Ada ya Mwezi ya Matawi (Branch Subscription & Auto-Renewal):
+   - Kila kituo kina muda maalum wa leseni/ada (Subscription Expiry).
+   - Mmiliki anaweza kulipia ada yake moja kwa moja kupitia Mobile Money
+     (M-Pesa, Tigo Pesa/Mixx, Airtel Money, Halopesa) kwa USSD Push papo hapo.
+   - Punguzo la vifurushi vya muda: Mwezi 1, Miezi 3, Miezi 6 na Mwaka 1.
+   - Kituo kikiisha muda wake, portal ya wateja inasimamishwa kiotomatiki
+     na kuonyesha taarifa rasmi ya kuwasiliana na mmiliki.
+3. Master Admin Control Center:
+   - Anaona vituo vyote, siku zilizobaki, na ada za matawi.
+   - Ana vitufe vya haraka vya kuongeza siku (+30 Siku, +90 Siku).
+   - Ana uwezo wa kusimamisha (Suspend) au kufungulia (Activate) kituo.
+   - Tofauti ya wazi kati ya Mauzo ya Vifurushi vya Wi-Fi na Mapato ya Ada za Matawi.
+4. Utambuzi otomatiki wa mitandao ya simu za Tanzania kulingana na namba (Telco Auto-Detect).
+5. Scanner ya Camera ya kusoma QR Code ya vocha moja kwa moja.
+6. Uchapishaji wa Vocha wa aina 2 (Kadi za A4 na Risiti za POS Thermal 58mm/80mm).
+7. Udhibiti wa MikroTik RouterOS API (Port 8728) & Kitufe cha kumtenga mtumiaji (Kick User).
+
+---------------------------------------------------------------------
+1. ANWANI ZA KUINGIA KWENYE MFUMO (LINKS):
+---------------------------------------------------------------------
+- Ukurasa wa Mwanzo (Launchpad):
+  http://localhost/glownet/index.php
+
+- Ukurasa wa Kuingia (Login):
+  http://localhost/glownet/login.php
+
+- Master Admin Control Center:
+  http://localhost/glownet/dashboard.php
+
+- Kituo Kikuu cha Ripoti za Fedha & PDF (Financial Reports):
+  http://localhost/glownet/reports.php
+
+- Dashboard ya Mmiliki wa Tawi (Kimara):
+  http://localhost/glownet/branch_dashboard.php
+
+- Ukurasa wa Kuchapisha Vocha (Print):
+  http://localhost/glownet/print_vouchers.php
+
+- Background Cron Worker (Kusafisha sessions na subscription zilizoisha):
+  http://localhost/glownet/cron_disconnect.php
+
+- Ukurasa wa Mteja wa Wi-Fi (Captive Portal):
+  * Kituo cha Kimara: http://localhost/glownet/portal.php?station=GLOW-KIMARA
+  * Kituo cha Mbezi:  http://localhost/glownet/portal.php?station=GLOW-MBEZI
+  * Kituo cha Sinza:  http://localhost/glownet/portal.php?station=GLOW-SINZA
+
+---------------------------------------------------------------------
+2. AKAUNTI ZA KUINGIA (CREDENTIALS):
+---------------------------------------------------------------------
+A) MASTER ADMIN (Anaona Matawi Yote, Mapato, na Subscriptions):
+   - Jina la Mtumiaji: admin
+   - Nenosiri (Password): admin123
+
+B) MMILIKI WA KITUO CHA KIMARA (Tawi la Kimara):
+   - Kodi / Simu: GLOW-KIMARA (au 0755111222)
+   - Nenosiri (Password): 1234
+
+C) MMILIKI WA KITUO CHA MBEZI (Tawi la Mbezi):
+   - Kodi / Simu: GLOW-MBEZI (au 0713333444)
+   - Nenosiri (Password): 1234
+
+D) MMILIKI WA KITUO CHA SINZA (Tawi la Sinza):
+   - Kodi / Simu: GLOW-SINZA (au 0788555666)
+   - Nenosiri (Password): 1234
+
+---------------------------------------------------------------------
+3. JINSI YA KUJARIBU BRANCH SUBSCRIPTION:
+---------------------------------------------------------------------
+1. Ingia kwenye Dashboard ya Tawi (branch_dashboard.php) kwa kutumia GLOW-KIMARA / 1234.
+2. Bonyeza kitufe cha juu au kwenye bango: "Ongeza Muda / Lipia Ada".
+3. Chagua mpango wa muda (Mwezi 1, Miezi 3, nk.), weka namba ya simu, na ubonyeze "Lipa Sasa".
+4. Mfumo utatuma USSD Push na kurefusha muda wa kituo papo hapo!
+5. Kwenye Master Admin (dashboard.php), unaweza kuongeza siku (+30 Siku) au kusimamisha kituo moja kwa moja.
+=====================================================================

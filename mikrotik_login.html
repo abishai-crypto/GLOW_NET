@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW NET Wi-Fi Hotspot - Inaelekeza...</title>
+    <meta http-equiv="refresh" content="0; url=http://localhost/glownet/portal.php?station=GLOW-KIMARA&mac=$(mac)&ip=$(ip)">
+    <script>
+        // Fallback JavaScript Redirect kwa vifaa vya simu visivyosoma meta refresh haraka
+        window.location.href = "http://localhost/glownet/portal.php?station=GLOW-KIMARA&mac=$(mac)&ip=$(ip)";
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #030712;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 380px;
+            padding: 2rem;
+            background: #0f172a;
+            border-radius: 1.5rem;
+            border: 1px solid #1e293b;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        .logo {
+            width: 56px;
+            height: 56px;
+            background: #f59e0b;
+            color: #030712;
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(245, 158, 11, 0.2);
+            border-top-color: #f59e0b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 1.5rem auto 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        a {
+            color: #fbbf24;
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">GN</div>
+        <h2 style="margin: 0 0 0.5rem; font-size: 1.25rem;">GLOW NET Wi-Fi</h2>
+        <p style="margin: 0; color: #94a3b8; font-size: 0.875rem;">Inakupeleka kwenye ukurasa wa vifurushi...</p>
+        <div class="spinner"></div>
+        <p style="font-size: 0.75rem; color: #64748b; margin-top: 1rem;">
+            Kama haikufunguka otomatiki: <br>
+            <a href="http://localhost/glownet/portal.php?station=GLOW-KIMARA&mac=$(mac)&ip=$(ip)">Bonyeza Hapa Kuendelea</a>
+        </p>
+    </div>
+</body>
+</html>
