@@ -1,0 +1,12 @@
+.git
+.gitignore
+.dockerignore
+.env
+.env.*
+config.local.php
+*.log
+*.zip
+*.tar.gz
+glownet_v*_packager.html
+.vscode
+.idea

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: glownet
+    runtime: docker
+    plan: free
+    region: frankfurt # Karibu zaidi na Afrika/Tanzania
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: "glownet_db"
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: PAYMENT_PROVIDER
+        value: "sandbox"
+      - key: APP_TIMEZONE
+        value: "Africa/Dar_es_Salaam"

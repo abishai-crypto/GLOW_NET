@@ -22,11 +22,23 @@ $last_error = '';
 
 foreach ($ports_to_try as $port) {
     try {
-        $tempPdo = new PDO("mysql:host=$db_host;port=$port;charset=utf8mb4", $db_user, $db_pass, [
+        $dsn = "mysql:host=$db_host;port=$port;charset=utf8mb4";
+        if ($db_host !== '127.0.0.1' && $db_host !== 'localhost') {
+            $dsn .= ";dbname=$db_name";
+        }
+
+        $pdoOptions = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_TIMEOUT => 3
-        ]);
+            PDO::ATTR_TIMEOUT => 5
+        ];
+
+        // Cloud MySQL SSL support (k.m. TiDB Cloud / Aiven)
+        if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT') && ($db_host !== '127.0.0.1' && $db_host !== 'localhost')) {
+            $pdoOptions[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+        }
+
+        $tempPdo = new PDO($dsn, $db_user, $db_pass, $pdoOptions);
         $pdo = $tempPdo;
         $connected_port = $port;
         break;
@@ -41,8 +53,8 @@ if (!$pdo) {
             <div style='width:44px;height:44px;border-radius:12px;background:#ef4444;display:flex;align-items:center;justify-content:center;font-weight:900;'>!</div>
             <h2 style='color:#f87171;margin:0;font-size:20px;'>GLOW NET: MySQL Haijapatikana!</h2>
         </div>
-        <p style='color:#cbd5e1;font-size:14px;line-height:1.6;'>Mfumo umejaribu kuunganisha kwenye <b>localhost:3307</b> na <b>localhost:3306</b> lakini huduma ya MySQL haijawashwa.</p>
-        <p style='color:#cbd5e1;font-size:14px;line-height:1.6;'><b>Cha Kufanya:</b> Fungua <b>XAMPP Control Panel</b> kwenye kompyuta yako kisha ubonyeze kitufe cha <b>Start</b> kwenye <b>MySQL</b>.</p>
+        <p style='color:#cbd5e1;font-size:14px;line-height:1.6;'>Mfumo umeshindwa kuunganisha kwenye database ya MySQL (Host: <b>" . htmlspecialchars($db_host) . "</b>).</p>
+        <p style='color:#cbd5e1;font-size:14px;line-height:1.6;'><b>Cha Kufanya:</b> Ikiwa unatumia XAMPP kwenye kompyuta, hakikisha umewasha <b>MySQL</b> kwenye XAMPP Control Panel. Ikiwa unatumia Cloud (Render/VPS), hakikisha vigezo vya <b>DB_HOST, DB_USER, DB_PASS</b> ni sahihi.</p>
         <div style='margin-top:16px;padding:12px;background:#020617;border-radius:10px;font-family:monospace;font-size:12px;color:#94a3b8;border:1px solid #1e293b;word-break:break-all;'>
             Hitilafu: " . htmlspecialchars($last_error) . "
         </div>
@@ -50,8 +62,14 @@ if (!$pdo) {
 }
 
 try {
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-    $pdo->exec("USE `$db_name`");
+    try {
+        $pdo->exec("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+    } catch (Throwable $dbCreateEx) {
+        // Baadhi ya cloud databases (k.m. TiDB Cloud) zinaruhusu database iliyopo tu
+    }
+    try {
+        $pdo->exec("USE `$db_name`");
+    } catch (Throwable $dbUseEx) {}
 
     // 0. TENGENEZA JEDWALI LA MA-ADMIN (ADMINS)
     $pdo->exec("
