@@ -33,9 +33,14 @@ foreach ($ports_to_try as $port) {
             PDO::ATTR_TIMEOUT => 5
         ];
 
-        // Cloud MySQL SSL support (k.m. TiDB Cloud / Aiven)
-        if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT') && ($db_host !== '127.0.0.1' && $db_host !== 'localhost')) {
-            $pdoOptions[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+        // Cloud MySQL SSL/TLS transport support (k.m. TiDB Cloud / Aiven)
+        if ($db_host !== '127.0.0.1' && $db_host !== 'localhost') {
+            if (defined('PDO::MYSQL_ATTR_SSL_CA')) {
+                $pdoOptions[PDO::MYSQL_ATTR_SSL_CA] = true;
+            }
+            if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
+                $pdoOptions[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+            }
         }
 
         $tempPdo = new PDO($dsn, $db_user, $db_pass, $pdoOptions);
